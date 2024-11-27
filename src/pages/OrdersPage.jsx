@@ -1,11 +1,12 @@
 import { CheckCircle, Clock, DollarSign, ShoppingBag } from "lucide-react";
 import { motion } from "framer-motion";
 
-import Header from "../components/common/Header";
-import StatCard from "../components/common/StatCard";
+
 import DailyOrders from "../components/orders/DailyOrders";
 import OrderDistribution from "../components/orders/OrderDistribution";
 import OrdersTable from "../components/orders/OrdersTable";
+import Header from "../components/Common/Header";
+import StatCard from "../components/Common/StatCard";
 
 const orderStats = {
 	totalOrders: "1,234",
@@ -26,7 +27,7 @@ const OrdersPage = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 1 }}
 				>
-					<StatCard name='Total Orders' icon={ShoppingBag} value={orderStats.totalOrders} color='#6366F1' />
+					<StatCardd name='Total Orders' icon={ShoppingBag} value={orderStats.totalOrders} color='#6366F1' />
 					<StatCard name='Pending Orders' icon={Clock} value={orderStats.pendingOrders} color='#F59E0B' />
 					<StatCard
 						name='Completed Orders'
