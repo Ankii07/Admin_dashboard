@@ -2,11 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import { CreditCard, DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
-import Header from "../components/common/Header";
-import StatCard from "../components/common/StatCard";
+
+
 import SalesOverviewChart from "../components/Sales/SalesOverviewChart";
 import SalesByCategoryChart from "../components/Sales/SalesByCategoryChart";
 import DailySalesTrend from "../components/Sales/DailySalesTrend";
+import Header from "../components/Common/Header";
+import StatCard from "../components/Common/StatCard";
 
 const salesStats = {
   totalRevenue: "$1,234,567",
@@ -34,7 +36,7 @@ const SalesPage = () => {
             value={salesStats.totalRevenue}
             color="#6366F1"
           />
-          <StatCard
+          <StatCardd
             name="Avg. Order Value"
             icon={ShoppingCart}
             value={salesStats.averageOrderValue}
