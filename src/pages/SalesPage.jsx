@@ -36,7 +36,7 @@ const SalesPage = () => {
             value={salesStats.totalRevenue}
             color="#6366F1"
           />
-          <StatCardd
+          <StatCard
             name="Avg. Order Value"
             icon={ShoppingCart}
             value={salesStats.averageOrderValue}

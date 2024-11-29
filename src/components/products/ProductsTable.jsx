@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PRODUCT_DATA = [
   {
@@ -48,17 +48,28 @@ const PRODUCT_DATA = [
 const ProductsTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(PRODUCT_DATA);
+  const [deletedProducts, setDeletedProducts] = useState(PRODUCT_DATA);
+  
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = PRODUCT_DATA.filter(
+    const filtered = deletedProducts.filter(
       (product) =>
         product.name.toLowerCase().includes(term) ||
         product.category.toLowerCase().includes(term)
     );
     setFilteredProducts(filtered);
   };
+
+  const handleDelete = (index) =>{
+    console.log(index);
+   const filtered = filteredProducts.filter(
+       (user,i) => i !== index
+   );
+   setDeletedProducts(filtered);
+   setFilteredProducts((prevUsers) => prevUsers.filter((_, i) => i !== index));
+ }
 
   return (
     <motion.div
@@ -111,7 +122,7 @@ const ProductsTable = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-700">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product,index) => (
               <motion.tr
                 key={product.id}
                 initial={{ opacity: 0 }}
@@ -144,7 +155,10 @@ const ProductsTable = () => {
                     <Edit size={18} />
                   </button>
                   <button className="text-red-400 hover:text-red-300">
-                    <Trash2 size={18} />
+                    <Trash2 size={18}
+                    onClick={() => handleDelete(index)}
+                     />
+                    
                   </button>
                 </td>
               </motion.tr>

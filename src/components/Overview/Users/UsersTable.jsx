@@ -4,35 +4,35 @@ import { Search } from "lucide-react";
 
 const userData = [
   {
-    id: 1,
+    id: 0,
     name: "John Doe",
     email: "john@example.com",
     role: "Customer",
     status: "Active",
   },
   {
-    id: 2,
+    id: 1,
     name: "Jane Smith",
     email: "jane@example.com",
     role: "Admin",
     status: "Active",
   },
   {
-    id: 3,
+    id: 2,
     name: "Bob Johnson",
     email: "bob@example.com",
     role: "Customer",
     status: "Inactive",
   },
   {
-    id: 4,
+    id: 3,
     name: "Alice Brown",
     email: "alice@example.com",
     role: "Customer",
     status: "Active",
   },
   {
-    id: 5,
+    id: 4,
     name: "Charlie Wilson",
     email: "charlie@example.com",
     role: "Moderator",
@@ -43,15 +43,26 @@ const userData = [
 const UsersTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(userData);
+  const [deletedUsers, setDeletedUsers] = useState(userData);
+  
 
-  const handleSearch = (e) =>{
+  const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = userData.filter(
-        (user) => user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
+    const filtered = deletedUsers.filter(
+      (user) => user.name.toLowerCase().includes(term) || user.email.toLowerCase().includes(term)
     );
-    setFilteredUsers(filtered)
-  }
+    setFilteredUsers(filtered);
+  };
+
+  const handleDelete = (index) =>{
+    console.log(index);
+   const filtered = filteredUsers.filter(
+       (user,i) => i !== index
+   );
+   setDeletedUsers(filtered);
+   setFilteredUsers((prevUsers) => prevUsers.filter((_, i) => i !== index));
+ }
 
   return (
     <motion.div
@@ -96,7 +107,7 @@ const UsersTable = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-700">
-            {filteredUsers.map((user) => (
+            {filteredUsers.map((user,index) => (
               <motion.tr
                 key={user.id}
                 initial={{ opacity: 0 }}
@@ -142,7 +153,9 @@ const UsersTable = () => {
                   <button className="text-indigo-400 hover:text-indigo-300 mr-2">
                     Edit
                   </button>
-                  <button className="text-red-400 hover:text-red-300">
+                  <button className="text-red-400 hover:text-red-300" 
+                  onClick={() => handleDelete(index)}
+                  >
                     Delete
                   </button>
                 </td>
